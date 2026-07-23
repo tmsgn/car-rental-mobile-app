@@ -16,6 +16,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _emailNotifications = false;
   bool _smsNotifications = true;
   bool _darkMode = false;
+  String _selectedLanguage = 'English (US)';
+  String _selectedRegion = 'United States';
 
   @override
   Widget build(BuildContext context) {
@@ -61,17 +63,78 @@ class _SettingsScreenState extends State<SettingsScreen> {
           _buildListTile(
             icon: LucideIcons.globe,
             title: 'Language',
-            subtitle: 'English (US)',
-            onTap: () {},
+            subtitle: _selectedLanguage,
+            onTap: _showLanguagePicker,
           ),
           _buildListTile(
             icon: LucideIcons.mapPin,
             title: 'Region',
-            subtitle: 'United States',
-            onTap: () {},
+            subtitle: _selectedRegion,
+            onTap: _showRegionPicker,
           ),
         ],
       ),
+    );
+  }
+
+  void _showLanguagePicker() {
+    final languages = ['English (US)', 'English (UK)', 'Spanish', 'French', 'German'];
+    _showSelectionSheet('Select Language', languages, _selectedLanguage, (val) {
+      setState(() => _selectedLanguage = val);
+    });
+  }
+
+  void _showRegionPicker() {
+    final regions = ['United States', 'Canada', 'United Kingdom', 'Australia', 'Europe'];
+    _showSelectionSheet('Select Region', regions, _selectedRegion, (val) {
+      setState(() => _selectedRegion = val);
+    });
+  }
+
+  void _showSelectionSheet(String title, List<String> options, String currentSelection, ValueChanged<String> onSelected) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(AppSpacing.radiusXl)),
+      ),
+      builder: (context) {
+        return Container(
+          padding: const EdgeInsets.symmetric(vertical: AppSpacing.lg),
+          decoration: const BoxDecoration(
+            color: AppColors.background,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(AppSpacing.radiusXl)),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.pagePadding),
+                child: Text(title, style: AppTypography.textTheme.headlineMedium),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              ...options.map((option) {
+                final isSelected = option == currentSelection;
+                return ListTile(
+                  title: Text(
+                    option,
+                    style: AppTypography.textTheme.titleMedium?.copyWith(
+                      color: isSelected ? AppColors.primary : AppColors.textPrimary,
+                    ),
+                  ),
+                  trailing: isSelected ? const Icon(LucideIcons.check, color: AppColors.primary) : null,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.pagePadding),
+                  onTap: () {
+                    onSelected(option);
+                    Navigator.pop(context);
+                  },
+                );
+              }),
+              const SizedBox(height: AppSpacing.xl),
+            ],
+          ),
+        );
+      },
     );
   }
 

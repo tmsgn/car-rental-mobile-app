@@ -21,6 +21,7 @@ class BookingSummaryScreen extends StatefulWidget {
 
 class _BookingSummaryScreenState extends State<BookingSummaryScreen> {
   bool _isLoading = false;
+  bool _termsAccepted = false;
 
   void _handleConfirm() {
     setState(() => _isLoading = true);
@@ -35,10 +36,10 @@ class _BookingSummaryScreenState extends State<BookingSummaryScreen> {
   @override
   Widget build(BuildContext context) {
     // Mock values
-    final tripDays = 3;
+    const tripDays = 3;
     final tripTotal = widget.vehicle.pricePerDay * tripDays;
-    final insurance = 25.0 * tripDays;
-    final fee = 15.0;
+    const insurance = 25.0 * tripDays;
+    const fee = 15.0;
     final total = tripTotal + insurance + fee;
     final paymentMethod = mockPaymentMethods.first;
 
@@ -235,6 +236,25 @@ class _BookingSummaryScreenState extends State<BookingSummaryScreen> {
           'Free cancellation up to 24 hours before the trip starts. A 50% fee applies for cancellations within 24 hours.',
           style: AppTypography.textTheme.bodyMedium,
         ),
+        const SizedBox(height: AppSpacing.xxl),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Checkbox(
+              value: _termsAccepted,
+              activeColor: AppColors.primary,
+              onChanged: (val) {
+                setState(() => _termsAccepted = val ?? false);
+              },
+            ),
+            Expanded(
+              child: Text(
+                'I agree to the Rental Agreement and Cancellation Policy.',
+                style: AppTypography.textTheme.bodyMedium,
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -255,7 +275,7 @@ class _BookingSummaryScreenState extends State<BookingSummaryScreen> {
       child: PrimaryButton(
         text: 'Pay \$${total.toStringAsFixed(2)}',
         isLoading: _isLoading,
-        onPressed: _handleConfirm,
+        onPressed: _termsAccepted ? _handleConfirm : null,
       ),
     );
   }

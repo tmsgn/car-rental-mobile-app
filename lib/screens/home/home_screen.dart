@@ -3,12 +3,13 @@ import '../../core/colors/app_colors.dart';
 import '../../core/typography/app_typography.dart';
 import '../../core/spacing/app_spacing.dart';
 import '../../mock_data/mock_data.dart';
-import '../../mock_data/mock_vehicles.dart';
+
 import '../../widgets/inputs/app_text_field.dart';
 import '../../widgets/cards/vehicle_card.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/routes/app_routes.dart';
 import '../../models/vehicle_model.dart';
+import '../../widgets/bottom_sheets/filter_bottom_sheet.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -73,7 +74,12 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.pagePadding),
       child: SearchBarWidget(
         onFilterTap: () {
-          // Open filter bottom sheet
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            builder: (context) => const FilterBottomSheet(),
+          );
         },
       ),
     );

@@ -3,12 +3,13 @@ import 'package:lucide_icons/lucide_icons.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/colors/app_colors.dart';
 import '../../core/spacing/app_spacing.dart';
-import '../../core/typography/app_typography.dart';
+
 import '../../mock_data/mock_vehicles.dart';
 import '../../widgets/cards/vehicle_card.dart';
 import '../../widgets/inputs/app_text_field.dart';
 import '../../models/vehicle_model.dart';
 import '../../core/routes/app_routes.dart';
+import '../../widgets/bottom_sheets/filter_bottom_sheet.dart';
 
 class BrowseScreen extends StatefulWidget {
   const BrowseScreen({super.key});
@@ -59,7 +60,12 @@ class _BrowseScreenState extends State<BrowseScreen> {
             padding: const EdgeInsets.all(AppSpacing.pagePadding),
             child: SearchBarWidget(
               onFilterTap: () {
-                // Open advanced filters
+                showModalBottomSheet(
+                  context: context,
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  builder: (context) => const FilterBottomSheet(),
+                );
               },
             ),
           ),

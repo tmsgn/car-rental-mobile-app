@@ -26,9 +26,11 @@ class ProfileScreen extends StatelessWidget {
               _buildMenuSection(
                 'Account Details',
                 [
-                  _MenuItem(icon: LucideIcons.user, title: 'Personal Information', onTap: () {}),
-                  _MenuItem(icon: LucideIcons.creditCard, title: 'Payment Methods', onTap: () {}),
-                  _MenuItem(icon: LucideIcons.fileBadge, title: 'Driver\'s License', onTap: () {}),
+                  _MenuItem(icon: LucideIcons.user, title: 'Personal Information', onTap: () => context.push(AppRoutes.editProfile)),
+                  _MenuItem(icon: LucideIcons.creditCard, title: 'Payment Methods', onTap: () => context.push(AppRoutes.paymentMethods)),
+                  _MenuItem(icon: LucideIcons.fileBadge, title: 'Driver\'s License', onTap: () => context.push(AppRoutes.driverLicense)),
+                  _MenuItem(icon: LucideIcons.mapPin, title: 'Saved Addresses', onTap: () => context.push(AppRoutes.savedAddresses)),
+                  _MenuItem(icon: LucideIcons.lock, title: 'Change Password', onTap: () => context.push(AppRoutes.changePassword)),
                 ],
               ),
               _buildMenuSection(
@@ -51,13 +53,36 @@ class ProfileScreen extends StatelessWidget {
                 child: SecondaryButton(
                   text: 'Log Out',
                   icon: LucideIcons.logOut,
-                  onPressed: () => context.go(AppRoutes.login),
+                  onPressed: () => _showLogoutDialog(context),
                 ),
               ),
               const SizedBox(height: AppSpacing.xxl),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Log Out'),
+        content: const Text('Are you sure you want to log out of DriveEase?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              context.go(AppRoutes.login);
+            },
+            child: const Text('Log Out', style: TextStyle(color: AppColors.error)),
+          ),
+        ],
       ),
     );
   }

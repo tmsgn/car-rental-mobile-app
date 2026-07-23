@@ -42,7 +42,7 @@ class SupportScreen extends StatelessWidget {
               icon: LucideIcons.phoneCall,
               title: 'Roadside Assistance',
               subtitle: '24/7 emergency support',
-              onTap: () {},
+              onTap: () => _showRoadsideDialog(context),
             ),
             
             const SizedBox(height: AppSpacing.xxxl),
@@ -55,6 +55,28 @@ class SupportScreen extends StatelessWidget {
     );
   }
 
+  void _showRoadsideDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Roadside Assistance'),
+        content: const Text('For immediate 24/7 emergency support, please call:\n\n1-800-DRIVE-NOW\n(1-800-374-8366)'),
+        actions: [
+          TextButton(onPressed: () => Navigator.pop(ctx), child: const Text('Cancel')),
+          TextButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Opening dialer...')),
+              );
+            },
+            child: const Text('Call Now', style: TextStyle(color: AppColors.primary)),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildSearchBox() {
     return Container(
       decoration: BoxDecoration(
@@ -62,12 +84,12 @@ class SupportScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
         border: Border.all(color: AppColors.border),
       ),
-      child: TextField(
+      child: const TextField(
         decoration: InputDecoration(
           hintText: 'Search for help...',
-          prefixIcon: const Icon(LucideIcons.search, color: AppColors.textTertiary),
+          prefixIcon: Icon(LucideIcons.search, color: AppColors.textTertiary),
           border: InputBorder.none,
-          contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.md),
+          contentPadding: EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.md),
         ),
       ),
     );

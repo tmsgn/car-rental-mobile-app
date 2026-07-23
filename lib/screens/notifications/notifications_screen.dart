@@ -51,7 +51,7 @@ class NotificationsScreen extends StatelessWidget {
         ],
       ),
       body: notifications.isEmpty
-          ? EmptyStateWidget(
+          ? const EmptyStateWidget(
               icon: LucideIcons.bell,
               title: 'No Notifications',
               message: 'You\'re all caught up! Check back later for updates.',

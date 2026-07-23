@@ -3,8 +3,10 @@ import 'package:lucide_icons/lucide_icons.dart';
 import '../../core/colors/app_colors.dart';
 import '../../core/spacing/app_spacing.dart';
 import '../../core/typography/app_typography.dart';
+import '../../core/routes/app_routes.dart';
 import '../../models/booking_model.dart';
 import '../../widgets/buttons/app_buttons.dart';
+import 'package:go_router/go_router.dart';
 
 class ReservationDetailsScreen extends StatelessWidget {
   final Booking booking;
@@ -146,13 +148,33 @@ class ReservationDetailsScreen extends StatelessWidget {
   Widget _buildActionButtons(BuildContext context) {
     return Column(
       children: [
-        PrimaryButton(
+        if (booking.status == BookingStatus.upcoming)
+          PrimaryButton(
+            text: 'Cancel Reservation',
+            onPressed: () => context.push(AppRoutes.cancelReservation, extra: booking),
+            backgroundColor: AppColors.error,
+          ),
+        if (booking.status == BookingStatus.active)
+          PrimaryButton(
+            text: 'Extend Trip',
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Opening extension calendar...')),
+              );
+            },
+            icon: LucideIcons.calendarClock,
+          ),
+        if (booking.status == BookingStatus.completed)
+          PrimaryButton(
+            text: 'Write a Review',
+            onPressed: () => context.push(AppRoutes.writeReview, extra: booking),
+            icon: LucideIcons.star,
+          ),
+        const SizedBox(height: AppSpacing.md),
+        SecondaryButton(
           text: 'View Rental Agreement',
-          onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Downloading Rental Agreement...')));
-          },
+          onPressed: () => context.push(AppRoutes.rentalAgreement),
           icon: LucideIcons.fileText,
-          isFullWidth: true,
         ),
         const SizedBox(height: AppSpacing.md),
         SecondaryButton(
