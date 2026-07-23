@@ -1,0 +1,143 @@
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+import '../../core/colors/app_colors.dart';
+import '../../core/spacing/app_spacing.dart';
+import '../../core/typography/app_typography.dart';
+import '../../core/routes/app_routes.dart';
+
+class SupportScreen extends StatelessWidget {
+  const SupportScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      appBar: AppBar(
+        title: const Text('Help Center'),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(AppSpacing.pagePadding),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('How can we help you?', style: AppTypography.textTheme.displayMedium),
+            const SizedBox(height: AppSpacing.lg),
+            
+            _buildSearchBox(),
+            const SizedBox(height: AppSpacing.xxxl),
+            
+            Text('Contact Us', style: AppTypography.textTheme.headlineMedium),
+            const SizedBox(height: AppSpacing.md),
+            _buildContactCard(
+              context,
+              icon: LucideIcons.messageCircle,
+              title: 'Live Chat',
+              subtitle: 'Typically responds in 5 minutes',
+              onTap: () => context.push(AppRoutes.chat),
+            ),
+            const SizedBox(height: AppSpacing.md),
+            _buildContactCard(
+              context,
+              icon: LucideIcons.phoneCall,
+              title: 'Roadside Assistance',
+              subtitle: '24/7 emergency support',
+              onTap: () {},
+            ),
+            
+            const SizedBox(height: AppSpacing.xxxl),
+            Text('Frequently Asked Questions', style: AppTypography.textTheme.headlineMedium),
+            const SizedBox(height: AppSpacing.md),
+            _buildFaqList(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSearchBox() {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: TextField(
+        decoration: InputDecoration(
+          hintText: 'Search for help...',
+          prefixIcon: const Icon(LucideIcons.search, color: AppColors.textTertiary),
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.md),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildContactCard(BuildContext context, {required IconData icon, required String title, required String subtitle, required VoidCallback onTap}) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+      child: Container(
+        padding: const EdgeInsets.all(AppSpacing.md),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+          border: Border.all(color: AppColors.border),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: AppColors.primaryLight,
+                borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
+              ),
+              child: Icon(icon, color: AppColors.primary),
+            ),
+            const SizedBox(width: AppSpacing.md),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: AppTypography.textTheme.titleLarge),
+                  const SizedBox(height: 4),
+                  Text(subtitle, style: AppTypography.textTheme.bodyMedium),
+                ],
+              ),
+            ),
+            const Icon(LucideIcons.chevronRight, color: AppColors.textTertiary),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildFaqList() {
+    final faqs = [
+      {'q': 'How do I cancel my reservation?', 'a': 'You can cancel your reservation for free up to 24 hours before your trip starts.'},
+      {'q': 'What happens if I return the car late?', 'a': 'Late returns are subject to a fee of \$50 per hour.'},
+      {'q': 'How does insurance work?', 'a': 'All trips include standard liability coverage. You can upgrade this during checkout.'},
+    ];
+
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: Column(
+        children: faqs.map((faq) {
+          return ExpansionTile(
+            title: Text(faq['q']!, style: AppTypography.textTheme.titleMedium),
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(AppSpacing.md).copyWith(top: 0),
+                child: Text(faq['a']!, style: AppTypography.textTheme.bodyLarge),
+              ),
+            ],
+          );
+        }).toList(),
+      ),
+    );
+  }
+}

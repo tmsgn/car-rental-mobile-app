@@ -1,0 +1,196 @@
+import 'package:flutter/material.dart';
+import 'package:lucide_icons/lucide_icons.dart';
+import 'package:go_router/go_router.dart';
+import '../../core/colors/app_colors.dart';
+import '../../core/spacing/app_spacing.dart';
+import '../../core/typography/app_typography.dart';
+import '../../core/routes/app_routes.dart';
+import '../../mock_data/mock_data.dart';
+import '../../widgets/buttons/app_buttons.dart';
+
+class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              _buildProfileHeader(),
+              const SizedBox(height: AppSpacing.lg),
+              _buildPointsCard(context),
+              const SizedBox(height: AppSpacing.lg),
+              _buildMenuSection(
+                'Account Details',
+                [
+                  _MenuItem(icon: LucideIcons.user, title: 'Personal Information', onTap: () {}),
+                  _MenuItem(icon: LucideIcons.creditCard, title: 'Payment Methods', onTap: () {}),
+                  _MenuItem(icon: LucideIcons.fileBadge, title: 'Driver\'s License', onTap: () {}),
+                ],
+              ),
+              _buildMenuSection(
+                'Preferences',
+                [
+                  _MenuItem(icon: LucideIcons.heart, title: 'Favorites', onTap: () => context.push(AppRoutes.favorites)),
+                  _MenuItem(icon: LucideIcons.bell, title: 'Notifications', onTap: () => context.push(AppRoutes.notifications)),
+                  _MenuItem(icon: LucideIcons.settings, title: 'Settings', onTap: () => context.push(AppRoutes.settings)),
+                ],
+              ),
+              _buildMenuSection(
+                'Support',
+                [
+                  _MenuItem(icon: LucideIcons.helpCircle, title: 'Help Center', onTap: () => context.push(AppRoutes.support)),
+                  _MenuItem(icon: LucideIcons.shieldQuestion, title: 'Terms & Privacy', onTap: () => context.push(AppRoutes.legal)),
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.all(AppSpacing.pagePadding),
+                child: SecondaryButton(
+                  text: 'Log Out',
+                  icon: LucideIcons.logOut,
+                  onPressed: () => context.go(AppRoutes.login),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.xxl),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProfileHeader() {
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.pagePadding),
+      color: AppColors.surface,
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 40,
+            backgroundImage: NetworkImage(mockCurrentUser.profileImageUrl),
+          ),
+          const SizedBox(width: AppSpacing.md),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(mockCurrentUser.fullName, style: AppTypography.textTheme.displaySmall),
+                const SizedBox(height: AppSpacing.xs),
+                Text(mockCurrentUser.email, style: AppTypography.textTheme.bodyMedium),
+                const SizedBox(height: AppSpacing.sm),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: AppColors.success.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(LucideIcons.checkCircle, size: 14, color: AppColors.success),
+                      const SizedBox(width: 4),
+                      Text('Verified Driver', style: AppTypography.textTheme.labelSmall?.copyWith(color: AppColors.success)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildPointsCard(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.pagePadding),
+      child: InkWell(
+        onTap: () => context.push(AppRoutes.rewards),
+        borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+        child: Container(
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          decoration: BoxDecoration(
+            gradient: const LinearGradient(
+              colors: [AppColors.primary, AppColors.primaryDark],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.primary.withOpacity(0.3),
+                blurRadius: 10,
+                offset: const Offset(0, 5),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('DriveEase Rewards', style: AppTypography.textTheme.labelLarge?.copyWith(color: Colors.white70)),
+                  const SizedBox(height: AppSpacing.xs),
+                  Text('${mockCurrentUser.rewardPoints} pts', style: AppTypography.textTheme.displayMedium?.copyWith(color: Colors.white)),
+                ],
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
+                ),
+                child: Text('Redeem', style: AppTypography.textTheme.labelLarge?.copyWith(color: AppColors.primary)),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMenuSection(String title, List<_MenuItem> items) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.pagePadding, vertical: AppSpacing.md),
+          child: Text(title, style: AppTypography.textTheme.headlineMedium),
+        ),
+        Container(
+          color: AppColors.surface,
+          child: Column(
+            children: items.map((item) {
+              return ListTile(
+                leading: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: AppColors.background,
+                    borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
+                  ),
+                  child: Icon(item.icon, size: 20, color: AppColors.primary),
+                ),
+                title: Text(item.title, style: AppTypography.textTheme.titleLarge),
+                trailing: const Icon(LucideIcons.chevronRight, size: 20, color: AppColors.textTertiary),
+                onTap: item.onTap,
+                contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.pagePadding, vertical: 4),
+              );
+            }).toList(),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _MenuItem {
+  final IconData icon;
+  final String title;
+  final VoidCallback onTap;
+
+  _MenuItem({required this.icon, required this.title, required this.onTap});
+}
