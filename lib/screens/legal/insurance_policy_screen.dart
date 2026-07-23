@@ -94,7 +94,7 @@ class InsurancePolicyScreen extends StatelessWidget {
                 color: AppColors.primary,
                 borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
               ),
-              child: Text('Most Popular', style: AppTypography.textTheme.labelSmall?.copyWith(color: Colors.white)),
+              child: Text('Most Popular', style: AppTypography.textTheme.labelSmall?.copyWith(color: AppColors.surface)),
             ),
             const SizedBox(height: AppSpacing.md),
           ],
@@ -111,7 +111,7 @@ class InsurancePolicyScreen extends StatelessWidget {
             child: Row(
               children: [
                 const Icon(Icons.check_circle, size: 16, color: AppColors.success),
-                const SizedBox(width: 8),
+                const SizedBox(width: AppSpacing.sm),
                 Expanded(child: Text(f, style: AppTypography.textTheme.bodyMedium)),
               ],
             ),

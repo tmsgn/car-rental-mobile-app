@@ -79,7 +79,7 @@ class NotificationsScreen extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(AppSpacing.sm),
             decoration: BoxDecoration(
               color: item.color.withOpacity(0.1),
               shape: BoxShape.circle,
@@ -106,7 +106,7 @@ class NotificationsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: AppSpacing.xs),
                 Text(
                   item.message,
                   style: AppTypography.textTheme.bodyMedium?.copyWith(

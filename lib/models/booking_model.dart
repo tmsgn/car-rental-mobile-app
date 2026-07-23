@@ -1,6 +1,18 @@
 import 'vehicle_model.dart';
 
-enum BookingStatus { upcoming, active, completed, cancelled }
+enum BookingStatus {
+  pending,
+  awaitingPayment,
+  confirmed,
+  pickupReady,
+  active,
+  extended,
+  completed,
+  cancelled,
+  rejected,
+  expired,
+  refunded
+}
 
 class Booking {
   final String id;
@@ -31,14 +43,28 @@ class Booking {
 
   String get statusLabel {
     switch (status) {
-      case BookingStatus.upcoming:
-        return 'Upcoming';
+      case BookingStatus.pending:
+        return 'Pending';
+      case BookingStatus.awaitingPayment:
+        return 'Awaiting Payment';
+      case BookingStatus.confirmed:
+        return 'Confirmed';
+      case BookingStatus.pickupReady:
+        return 'Pickup Ready';
       case BookingStatus.active:
         return 'Active';
+      case BookingStatus.extended:
+        return 'Extended';
       case BookingStatus.completed:
         return 'Completed';
       case BookingStatus.cancelled:
         return 'Cancelled';
+      case BookingStatus.rejected:
+        return 'Rejected';
+      case BookingStatus.expired:
+        return 'Expired';
+      case BookingStatus.refunded:
+        return 'Refunded';
     }
   }
 }

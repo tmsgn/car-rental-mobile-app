@@ -144,7 +144,7 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
         borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.2),
+            color: AppColors.textPrimary.withOpacity(0.2),
             blurRadius: 15,
             offset: const Offset(0, 8),
           ),
@@ -157,13 +157,13 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Icon(LucideIcons.creditCard, color: Colors.white70, size: 32),
-              Icon(LucideIcons.wifi, color: Colors.white.withOpacity(0.5), size: 28),
+              const Icon(LucideIcons.creditCard, color: AppColors.textSecondary, size: 32),
+              Icon(LucideIcons.wifi, color: AppColors.surface.withOpacity(0.5), size: 28),
             ],
           ),
           Text(
             '•••• •••• •••• ••••',
-            style: AppTypography.textTheme.displaySmall?.copyWith(color: Colors.white, letterSpacing: 4),
+            style: AppTypography.textTheme.displaySmall?.copyWith(color: AppColors.surface, letterSpacing: 4),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -171,15 +171,15 @@ class _AddPaymentMethodScreenState extends State<AddPaymentMethodScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('CARDHOLDER', style: AppTypography.textTheme.labelSmall?.copyWith(color: Colors.white54)),
-                  Text('YOUR NAME', style: AppTypography.textTheme.titleMedium?.copyWith(color: Colors.white)),
+                  Text('CARDHOLDER', style: AppTypography.textTheme.labelSmall?.copyWith(color: AppColors.textTertiary)),
+                  Text('YOUR NAME', style: AppTypography.textTheme.titleMedium?.copyWith(color: AppColors.surface)),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('EXPIRES', style: AppTypography.textTheme.labelSmall?.copyWith(color: Colors.white54)),
-                  Text('MM/YY', style: AppTypography.textTheme.titleMedium?.copyWith(color: Colors.white)),
+                  Text('EXPIRES', style: AppTypography.textTheme.labelSmall?.copyWith(color: AppColors.textTertiary)),
+                  Text('MM/YY', style: AppTypography.textTheme.titleMedium?.copyWith(color: AppColors.surface)),
                 ],
               ),
             ],

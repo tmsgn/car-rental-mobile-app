@@ -215,12 +215,12 @@ class _VehicleInspectionScreenState extends State<VehicleInspectionScreen> {
             height: 200,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.surface,
               borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
               border: Border.all(color: AppColors.border),
             ),
             child: const Center(
-              child: Text('Sign Here (Mock Canvas)', style: TextStyle(color: Colors.grey)),
+              child: Text('Sign Here (Mock Canvas)', style: TextStyle(color: AppColors.textTertiary)),
             ),
           ),
           const SizedBox(height: AppSpacing.md),

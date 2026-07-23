@@ -116,7 +116,7 @@ class ProfileScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Icon(LucideIcons.checkCircle, size: 14, color: AppColors.success),
-                      const SizedBox(width: 4),
+                      const SizedBox(width: AppSpacing.xs),
                       Text('Verified Driver', style: AppTypography.textTheme.labelSmall?.copyWith(color: AppColors.success)),
                     ],
                   ),
@@ -158,15 +158,15 @@ class ProfileScreen extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('DriveEase Rewards', style: AppTypography.textTheme.labelLarge?.copyWith(color: Colors.white70)),
+                  Text('DriveEase Rewards', style: AppTypography.textTheme.labelLarge?.copyWith(color: AppColors.textSecondary)),
                   const SizedBox(height: AppSpacing.xs),
-                  Text('${mockCurrentUser.rewardPoints} pts', style: AppTypography.textTheme.displayMedium?.copyWith(color: Colors.white)),
+                  Text('${mockCurrentUser.rewardPoints} pts', style: AppTypography.textTheme.displayMedium?.copyWith(color: AppColors.surface)),
                 ],
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.surface,
                   borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
                 ),
                 child: Text('Redeem', style: AppTypography.textTheme.labelLarge?.copyWith(color: AppColors.primary)),
@@ -192,7 +192,7 @@ class ProfileScreen extends StatelessWidget {
             children: items.map((item) {
               return ListTile(
                 leading: Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(AppSpacing.sm),
                   decoration: BoxDecoration(
                     color: AppColors.background,
                     borderRadius: BorderRadius.circular(AppSpacing.radiusSm),

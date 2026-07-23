@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class AppColors {
   AppColors._();
 
@@ -12,14 +13,14 @@ class AppColors {
   
   // Background Colors
   static const Color background = Color(0xFFF8FAFC); // Slate 50
-  static const Color surface = Colors.white;
+  static const Color surface = Color(0xFFFFFFFF);
   static const Color surfaceElevated = Color(0xFFF1F5F9); // Slate 100
 
   // Text Colors
   static const Color textPrimary = Color(0xFF0F172A); // Slate 900
   static const Color textSecondary = Color(0xFF475569); // Slate 600
   static const Color textTertiary = Color(0xFF94A3B8); // Slate 400
-  static const Color textInverse = Colors.white;
+  static const Color textInverse = AppColors.surface;
 
   // Status Colors
   static const Color success = Color(0xFF10B981); // Emerald 500

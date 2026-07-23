@@ -33,7 +33,7 @@ class ReservationsScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            _buildBookingsList(context, mockUpcomingBookings),
+            _buildBookingsList(context, mockUpcomingBookings.where((b) => b.status == BookingStatus.pending).toList()),
             _buildBookingsList(context, mockPastBookings),
           ],
         ),
@@ -77,7 +77,7 @@ class ReservationsScreen extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: booking.status == BookingStatus.upcoming 
+                        color: booking.status == BookingStatus.pending 
                             ? AppColors.primaryLight 
                             : AppColors.surfaceElevated,
                         borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
@@ -85,7 +85,7 @@ class ReservationsScreen extends StatelessWidget {
                       child: Text(
                         booking.status.name.toUpperCase(),
                         style: AppTypography.textTheme.labelSmall?.copyWith(
-                          color: booking.status == BookingStatus.upcoming 
+                          color: booking.status == BookingStatus.pending 
                               ? AppColors.primary 
                               : AppColors.textSecondary,
                         ),

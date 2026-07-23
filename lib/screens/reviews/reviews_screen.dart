@@ -102,7 +102,7 @@ class ReviewsScreen extends StatelessWidget {
                   );
                 }),
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: AppSpacing.xs),
               Text('Based on ${reviews.length} reviews', style: AppTypography.textTheme.bodyMedium),
             ],
           ),
@@ -143,7 +143,7 @@ class ReviewsScreen extends StatelessWidget {
               child: Row(
                 children: [
                   const Icon(LucideIcons.star, size: 14, color: AppColors.warning),
-                  const SizedBox(width: 4),
+                  const SizedBox(width: AppSpacing.xs),
                   Text(
                     review.rating.toStringAsFixed(1),
                     style: AppTypography.textTheme.labelMedium?.copyWith(color: AppColors.warning),
@@ -166,7 +166,7 @@ class ReviewsScreen extends StatelessWidget {
         color: AppColors.surface,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: AppColors.textPrimary.withOpacity(0.05),
             blurRadius: 10,
             offset: const Offset(0, -4),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/spacing/app_spacing.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/colors/app_colors.dart';
 import '../../core/typography/app_typography.dart';
@@ -60,9 +61,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(24),
+                  padding: const EdgeInsets.all(AppSpacing.lg),
                   decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.surface,
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
@@ -71,18 +72,18 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                     color: AppColors.primary,
                   ),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: AppSpacing.lg),
                 Text(
                   'DriveEase',
                   style: AppTypography.textTheme.displayMedium?.copyWith(
-                    color: Colors.white,
+                    color: AppColors.surface,
                   ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: AppSpacing.sm),
                 Text(
                   'Premium Car Rentals',
                   style: AppTypography.textTheme.bodyLarge?.copyWith(
-                    color: Colors.white70,
+                    color: AppColors.textSecondary,
                     letterSpacing: 1.2,
                   ),
                 ),

@@ -60,12 +60,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         );
                       },
                       child: Container(
-                        padding: const EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(AppSpacing.sm),
                         decoration: const BoxDecoration(
                           color: AppColors.primary,
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(LucideIcons.camera, size: 18, color: Colors.white),
+                        child: const Icon(LucideIcons.camera, size: 18, color: AppColors.surface),
                       ),
                     ),
                   ),

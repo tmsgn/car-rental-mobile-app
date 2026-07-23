@@ -106,14 +106,14 @@ class _ChatScreenState extends State<ChatScreen> {
             Text(
               text,
               style: AppTypography.textTheme.bodyLarge?.copyWith(
-                color: isMe ? Colors.white : AppColors.textPrimary,
+                color: isMe ? AppColors.surface : AppColors.textPrimary,
               ),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: AppSpacing.xs),
             Text(
               time,
               style: AppTypography.textTheme.labelSmall?.copyWith(
-                color: isMe ? Colors.white70 : AppColors.textTertiary,
+                color: isMe ? AppColors.textSecondary : AppColors.textTertiary,
               ),
             ),
           ],
@@ -129,7 +129,7 @@ class _ChatScreenState extends State<ChatScreen> {
         color: AppColors.surface,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: AppColors.textPrimary.withOpacity(0.05),
             blurRadius: 5,
             offset: const Offset(0, -2),
           ),
@@ -160,7 +160,7 @@ class _ChatScreenState extends State<ChatScreen> {
             CircleAvatar(
               backgroundColor: AppColors.primary,
               child: IconButton(
-                icon: const Icon(LucideIcons.send, color: Colors.white, size: 20),
+                icon: const Icon(LucideIcons.send, color: AppColors.surface, size: 20),
                 onPressed: _sendMessage,
               ),
             ),

@@ -66,7 +66,7 @@ class DriverRequirementsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('Identity Verification', style: AppTypography.textTheme.titleMedium),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: AppSpacing.xs),
                         Text(
                           'Before your first trip, you may be asked to upload a photo of your license and a selfie for identity verification.',
                           style: AppTypography.textTheme.bodyMedium,
@@ -88,7 +88,7 @@ class DriverRequirementsScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(AppSpacing.md),
           decoration: BoxDecoration(
             color: AppColors.surface,
             borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
@@ -102,7 +102,7 @@ class DriverRequirementsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(title, style: AppTypography.textTheme.titleLarge),
-              const SizedBox(height: 4),
+              const SizedBox(height: AppSpacing.xs),
               Text(description, style: AppTypography.textTheme.bodyLarge),
             ],
           ),

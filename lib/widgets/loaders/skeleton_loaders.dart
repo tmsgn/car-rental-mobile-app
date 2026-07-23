@@ -26,12 +26,12 @@ class VehicleSkeleton extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Shimmer.fromColors(
-            baseColor: Colors.grey[300]!,
-            highlightColor: Colors.grey[100]!,
+            baseColor: AppColors.textTertiary,
+            highlightColor: AppColors.textTertiary,
             child: Container(
               height: 160,
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: AppColors.surface,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(AppSpacing.radiusLg)),
               ),
             ),
@@ -72,12 +72,12 @@ class VehicleSkeleton extends StatelessWidget {
       child: Row(
         children: [
           Shimmer.fromColors(
-            baseColor: Colors.grey[300]!,
-            highlightColor: Colors.grey[100]!,
+            baseColor: AppColors.textTertiary,
+            highlightColor: AppColors.textTertiary,
             child: Container(
               width: 140,
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: AppColors.surface,
                 borderRadius: BorderRadius.horizontal(left: Radius.circular(AppSpacing.radiusLg)),
               ),
             ),
@@ -109,13 +109,13 @@ class VehicleSkeleton extends StatelessWidget {
 
   Widget _buildSkeletonBox({required double width, required double height, double borderRadius = 4.0}) {
     return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
+      baseColor: AppColors.textTertiary,
+      highlightColor: AppColors.textTertiary,
       child: Container(
         width: width,
         height: height,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.surface,
           borderRadius: BorderRadius.circular(borderRadius),
         ),
       ),

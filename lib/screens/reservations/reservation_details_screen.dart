@@ -42,16 +42,23 @@ class ReservationDetailsScreen extends StatelessWidget {
   Widget _buildStatusHeader() {
     BadgeStatus badgeStatus;
     switch (booking.status) {
-      case BookingStatus.upcoming:
+      case BookingStatus.pending:
+      case BookingStatus.awaitingPayment:
+      case BookingStatus.confirmed:
+      case BookingStatus.pickupReady:
         badgeStatus = BadgeStatus.pending;
         break;
       case BookingStatus.active:
+      case BookingStatus.extended:
         badgeStatus = BadgeStatus.active;
         break;
       case BookingStatus.completed:
         badgeStatus = BadgeStatus.completed;
         break;
       case BookingStatus.cancelled:
+      case BookingStatus.rejected:
+      case BookingStatus.expired:
+      case BookingStatus.refunded:
         badgeStatus = BadgeStatus.cancelled;
         break;
     }
@@ -68,7 +75,7 @@ class ReservationDetailsScreen extends StatelessWidget {
           StatusBadge(label: booking.statusLabel, status: badgeStatus),
           const SizedBox(height: AppSpacing.md),
           Text('Booking Reference', style: AppTypography.textTheme.bodyMedium?.copyWith(color: AppColors.primary)),
-          const SizedBox(height: 4),
+          const SizedBox(height: AppSpacing.xs),
           Text(booking.bookingReference, style: AppTypography.textTheme.headlineMedium?.copyWith(color: AppColors.primary)),
         ],
       ),
@@ -93,11 +100,11 @@ class ReservationDetailsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(booking.vehicle.fullName, style: AppTypography.textTheme.titleLarge),
-              const SizedBox(height: 4),
+              const SizedBox(height: AppSpacing.xs),
               Row(
                 children: [
                   const Icon(LucideIcons.mapPin, size: 14, color: AppColors.textTertiary),
-                  const SizedBox(width: 4),
+                  const SizedBox(width: AppSpacing.xs),
                   Expanded(child: Text(booking.pickupLocation, style: AppTypography.textTheme.bodyMedium)),
                 ],
               ),
@@ -136,7 +143,7 @@ class ReservationDetailsScreen extends StatelessWidget {
                 border: Border.all(color: isCompleted || isCurrent ? AppColors.primary : AppColors.border, width: 2),
                 shape: BoxShape.circle,
               ),
-              child: isCompleted ? const Icon(LucideIcons.check, size: 14, color: Colors.white) : null,
+              child: isCompleted ? const Icon(LucideIcons.check, size: 14, color: AppColors.surface) : null,
             ),
             if (!isLast)
               Container(
@@ -154,7 +161,7 @@ class ReservationDetailsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title, style: AppTypography.textTheme.titleMedium?.copyWith(color: isCurrent ? AppColors.primary : AppColors.textPrimary)),
-                const SizedBox(height: 2),
+                const SizedBox(height: AppSpacing.xs),
                 Text(subtitle, style: AppTypography.textTheme.bodyMedium),
               ],
             ),
@@ -167,7 +174,7 @@ class ReservationDetailsScreen extends StatelessWidget {
   Widget _buildActionButtons(BuildContext context) {
     return Column(
       children: [
-        if (booking.status == BookingStatus.upcoming) ...[
+        if (booking.status == BookingStatus.pending) ...[
           PrimaryButton(
             text: 'Start Pickup Inspection',
             onPressed: () => context.push(AppRoutes.vehicleInspection, extra: false),

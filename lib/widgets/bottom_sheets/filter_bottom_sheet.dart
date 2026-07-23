@@ -136,7 +136,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
         child: Text(
           label,
           style: AppTypography.textTheme.bodyMedium?.copyWith(
-            color: isSelected ? Colors.white : AppColors.textPrimary,
+            color: isSelected ? AppColors.surface : AppColors.textPrimary,
           ),
         ),
       ),

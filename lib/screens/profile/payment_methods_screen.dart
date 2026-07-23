@@ -70,7 +70,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => context.push(AppRoutes.addPaymentMethod),
         backgroundColor: AppColors.primary,
-        foregroundColor: Colors.white,
+        foregroundColor: AppColors.surface,
         icon: const Icon(LucideIcons.plus),
         label: const Text('Add Card'),
       ),
@@ -106,7 +106,7 @@ class _PaymentMethodsScreenState extends State<PaymentMethodsScreen> {
                   child: Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(AppSpacing.sm),
                         decoration: BoxDecoration(
                           color: AppColors.primaryLight,
                           borderRadius: BorderRadius.circular(AppSpacing.radiusSm),

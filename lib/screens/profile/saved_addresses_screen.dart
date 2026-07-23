@@ -60,7 +60,7 @@ class _SavedAddressesScreenState extends State<SavedAddressesScreen> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _addAddress,
         backgroundColor: AppColors.primary,
-        foregroundColor: Colors.white,
+        foregroundColor: AppColors.surface,
         icon: const Icon(LucideIcons.plus),
         label: const Text('Add Address'),
       ),
@@ -92,7 +92,7 @@ class _SavedAddressesScreenState extends State<SavedAddressesScreen> {
                   child: Row(
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(AppSpacing.sm),
                         decoration: BoxDecoration(
                           color: AppColors.primaryLight,
                           borderRadius: BorderRadius.circular(AppSpacing.radiusSm),

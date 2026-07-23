@@ -60,21 +60,21 @@ class RewardsScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const Icon(LucideIcons.award, color: Colors.white, size: 48),
+          const Icon(LucideIcons.award, color: AppColors.surface, size: 48),
           const SizedBox(height: AppSpacing.md),
-          Text('DriveEase Points', style: AppTypography.textTheme.titleLarge?.copyWith(color: Colors.white70)),
+          Text('DriveEase Points', style: AppTypography.textTheme.titleLarge?.copyWith(color: AppColors.textSecondary)),
           const SizedBox(height: AppSpacing.xs),
-          Text('${mockCurrentUser.rewardPoints}', style: AppTypography.textTheme.displayLarge?.copyWith(color: Colors.white)),
+          Text('${mockCurrentUser.rewardPoints}', style: AppTypography.textTheme.displayLarge?.copyWith(color: AppColors.surface)),
           const SizedBox(height: AppSpacing.lg),
           LinearProgressIndicator(
             value: 0.65,
-            backgroundColor: Colors.white24,
-            valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+            backgroundColor: AppColors.border,
+            valueColor: const AlwaysStoppedAnimation<Color>(AppColors.surface),
             borderRadius: BorderRadius.circular(AppSpacing.radiusPill),
             minHeight: 8,
           ),
           const SizedBox(height: AppSpacing.sm),
-          Text('350 points to Gold Tier', style: AppTypography.textTheme.bodyMedium?.copyWith(color: Colors.white70)),
+          Text('350 points to Gold Tier', style: AppTypography.textTheme.bodyMedium?.copyWith(color: AppColors.textSecondary)),
         ],
       ),
     );
@@ -92,7 +92,7 @@ class RewardsScreen extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(AppSpacing.md),
             decoration: BoxDecoration(
               color: AppColors.primaryLight,
               borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
@@ -105,7 +105,7 @@ class RewardsScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(coupon.code, style: AppTypography.textTheme.titleMedium),
-                const SizedBox(height: 4),
+                const SizedBox(height: AppSpacing.xs),
                 Text(coupon.description, style: AppTypography.textTheme.bodyMedium),
               ],
             ),

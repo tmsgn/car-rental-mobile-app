@@ -1,5 +1,15 @@
 enum TransactionType { payment, refund, deposit, fee }
-enum TransactionStatus { completed, pending, failed, refunded }
+enum TransactionStatus {
+  pending,
+  processing,
+  successful,
+  failed,
+  refunded,
+  partiallyRefunded,
+  cancelled,
+  depositHeld,
+  depositReleased
+}
 
 class Transaction {
   final String id;
@@ -39,14 +49,24 @@ class Transaction {
 
   String get statusLabel {
     switch (status) {
-      case TransactionStatus.completed:
-        return 'Completed';
       case TransactionStatus.pending:
         return 'Pending';
+      case TransactionStatus.processing:
+        return 'Processing';
+      case TransactionStatus.successful:
+        return 'Successful';
       case TransactionStatus.failed:
         return 'Failed';
       case TransactionStatus.refunded:
         return 'Refunded';
+      case TransactionStatus.partiallyRefunded:
+        return 'Partially Refunded';
+      case TransactionStatus.cancelled:
+        return 'Cancelled';
+      case TransactionStatus.depositHeld:
+        return 'Deposit Held';
+      case TransactionStatus.depositReleased:
+        return 'Deposit Released';
     }
   }
 }

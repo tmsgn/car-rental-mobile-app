@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lucide_icons/lucide_icons.dart';
-import 'package:intl/intl.dart';
 import '../../core/colors/app_colors.dart';
 import '../../core/spacing/app_spacing.dart';
 import '../../core/typography/app_typography.dart';
 import '../../core/routes/app_routes.dart';
 import '../../models/vehicle_model.dart';
 import '../../widgets/buttons/app_buttons.dart';
+import 'components/booking_date_components.dart';
 
 class BookingDateScreen extends StatefulWidget {
   final Vehicle vehicle;
@@ -23,8 +22,6 @@ class _BookingDateScreenState extends State<BookingDateScreen> {
   DateTime? _endDate = DateTime.now().add(const Duration(days: 3));
   TimeOfDay? _startTime = const TimeOfDay(hour: 10, minute: 0);
   TimeOfDay? _endTime = const TimeOfDay(hour: 10, minute: 0);
-
-  final DateFormat _dateFormatter = DateFormat('EEE, MMM d, yyyy');
 
   void _selectDateRange() async {
     final initialDateRange = DateTimeRange(
@@ -42,7 +39,7 @@ class _BookingDateScreenState extends State<BookingDateScreen> {
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
               primary: AppColors.primary,
-              onPrimary: Colors.white,
+              onPrimary: AppColors.surface,
               onSurface: AppColors.textPrimary,
             ),
           ),
@@ -104,23 +101,39 @@ class _BookingDateScreenState extends State<BookingDateScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildVehicleSummary(),
+                    VehicleSummaryCard(vehicle: widget.vehicle),
                     const SizedBox(height: AppSpacing.xxl),
                     Text('Trip Dates', style: AppTypography.textTheme.headlineMedium),
                     const SizedBox(height: AppSpacing.md),
-                    _buildDateSelector(),
+                    DateSelectorCard(
+                      startDate: _startDate,
+                      endDate: _endDate,
+                      onTap: _selectDateRange,
+                    ),
                     const SizedBox(height: AppSpacing.xxl),
                     Text('Pickup & Return Time', style: AppTypography.textTheme.headlineMedium),
                     const SizedBox(height: AppSpacing.md),
                     Row(
                       children: [
-                        Expanded(child: _buildTimeSelector(true)),
+                        Expanded(
+                          child: TimeSelectorCard(
+                            time: _startTime,
+                            isStart: true,
+                            onTap: () => _selectTime(true),
+                          ),
+                        ),
                         const SizedBox(width: AppSpacing.md),
-                        Expanded(child: _buildTimeSelector(false)),
+                        Expanded(
+                          child: TimeSelectorCard(
+                            time: _endTime,
+                            isStart: false,
+                            onTap: () => _selectTime(false),
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: AppSpacing.xxl),
-                    _buildLocationInfo(),
+                    LocationInfoCard(location: widget.vehicle.location),
                   ],
                 ),
               ),
@@ -132,149 +145,6 @@ class _BookingDateScreenState extends State<BookingDateScreen> {
     );
   }
 
-  Widget _buildVehicleSummary() {
-    return Container(
-      padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
-        border: Border.all(color: AppColors.border),
-      ),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
-            child: Image.network(
-              widget.vehicle.imageUrls.first,
-              width: 80,
-              height: 60,
-              fit: BoxFit.cover,
-            ),
-          ),
-          const SizedBox(width: AppSpacing.md),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(widget.vehicle.fullName, style: AppTypography.textTheme.titleLarge),
-                const SizedBox(height: AppSpacing.xs),
-                Text('\$${widget.vehicle.pricePerDay.toInt()} / day', style: AppTypography.textTheme.bodyMedium?.copyWith(color: AppColors.primary)),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildDateSelector() {
-    return InkWell(
-      onTap: _selectDateRange,
-      borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-      child: Container(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-          border: Border.all(color: AppColors.border),
-        ),
-        child: Row(
-          children: [
-            const Icon(LucideIcons.calendar, color: AppColors.primary),
-            const SizedBox(width: AppSpacing.md),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    _startDate == null ? 'Select Dates' : '${_dateFormatter.format(_startDate!)} - ${_dateFormatter.format(_endDate!)}',
-                    style: AppTypography.textTheme.titleLarge,
-                  ),
-                  if (_startDate != null) ...[
-                    const SizedBox(height: 4),
-                    Text('${_endDate!.difference(_startDate!).inDays} days total', style: AppTypography.textTheme.bodySmall),
-                  ]
-                ],
-              ),
-            ),
-            const Icon(LucideIcons.chevronRight, color: AppColors.textTertiary),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTimeSelector(bool isStart) {
-    final time = isStart ? _startTime : _endTime;
-    return InkWell(
-      onTap: () => _selectTime(isStart),
-      borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-      child: Container(
-        padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          color: AppColors.surface,
-          borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-          border: Border.all(color: AppColors.border),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(isStart ? 'Pickup Time' : 'Return Time', style: AppTypography.textTheme.bodySmall),
-            const SizedBox(height: 4),
-            Row(
-              children: [
-                const Icon(LucideIcons.clock, size: 16, color: AppColors.textSecondary),
-                const SizedBox(width: 8),
-                Text(time?.format(context) ?? '10:00 AM', style: AppTypography.textTheme.titleMedium),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildLocationInfo() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Pickup & Return Location', style: AppTypography.textTheme.headlineMedium),
-        const SizedBox(height: AppSpacing.md),
-        Container(
-          padding: const EdgeInsets.all(AppSpacing.md),
-          decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.circular(AppSpacing.radiusMd),
-            border: Border.all(color: AppColors.border),
-          ),
-          child: Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: AppColors.primaryLight,
-                  borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
-                ),
-                child: const Icon(LucideIcons.mapPin, color: AppColors.primary),
-              ),
-              const SizedBox(width: AppSpacing.md),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(widget.vehicle.location, style: AppTypography.textTheme.titleLarge),
-                    const SizedBox(height: 4),
-                    Text('Exact address provided after booking', style: AppTypography.textTheme.bodySmall),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget _buildBottomBar() {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.pagePadding),
@@ -282,7 +152,7 @@ class _BookingDateScreenState extends State<BookingDateScreen> {
         color: AppColors.surface,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: AppColors.textPrimary.withOpacity(0.05),
             blurRadius: 10,
             offset: const Offset(0, -4),
           ),

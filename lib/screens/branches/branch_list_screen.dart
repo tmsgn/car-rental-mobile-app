@@ -39,7 +39,7 @@ class BranchListScreen extends StatelessWidget {
           border: Border.all(color: AppColors.border),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.02),
+              color: AppColors.textPrimary.withOpacity(0.02),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),
@@ -97,7 +97,7 @@ class BranchListScreen extends StatelessWidget {
                       Text('${branch.availableVehicles} vehicles available', style: AppTypography.textTheme.bodyMedium),
                       const Spacer(),
                       const Icon(Icons.star, size: 16, color: AppColors.warning),
-                      const SizedBox(width: 4),
+                      const SizedBox(width: AppSpacing.xs),
                       Text(branch.rating.toString(), style: AppTypography.textTheme.titleSmall),
                     ],
                   ),

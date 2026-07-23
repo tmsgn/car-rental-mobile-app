@@ -119,7 +119,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   child: Icon(
                     cat['icon'] as IconData,
-                    color: isSelected ? Colors.white : AppColors.textPrimary,
+                    color: isSelected ? AppColors.surface : AppColors.textPrimary,
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm),

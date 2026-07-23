@@ -28,7 +28,7 @@ class InvoiceDetailScreen extends StatelessWidget {
           children: [
             const SizedBox(height: AppSpacing.xl),
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
                 color: AppColors.success.withOpacity(0.1),
                 shape: BoxShape.circle,
@@ -37,7 +37,7 @@ class InvoiceDetailScreen extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.md),
             Text('\$${transaction.amount.toStringAsFixed(2)}', style: AppTypography.textTheme.displayMedium),
-            const SizedBox(height: 4),
+            const SizedBox(height: AppSpacing.xs),
             Text(transaction.statusLabel, style: AppTypography.textTheme.titleMedium?.copyWith(color: AppColors.success)),
             
             const SizedBox(height: AppSpacing.xxxl),

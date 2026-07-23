@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/colors/app_colors.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../core/spacing/app_spacing.dart';
 
@@ -21,13 +22,13 @@ class AppLoadingSkeleton extends StatelessWidget {
     return Padding(
       padding: margin ?? EdgeInsets.zero,
       child: Shimmer.fromColors(
-        baseColor: Colors.grey[300]!,
-        highlightColor: Colors.grey[100]!,
+        baseColor: AppColors.textTertiary,
+        highlightColor: AppColors.textTertiary,
         child: Container(
           height: height,
           width: width,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.surface,
             borderRadius: BorderRadius.circular(borderRadius),
           ),
         ),

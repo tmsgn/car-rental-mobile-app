@@ -42,7 +42,7 @@ class VehicleCard extends StatelessWidget {
           border: Border.all(color: AppColors.border),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
+              color: AppColors.textPrimary.withOpacity(0.04),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -66,12 +66,12 @@ class VehicleCard extends StatelessWidget {
                               imageUrl: vehicle.imageUrls.first,
                               fit: BoxFit.cover,
                               placeholder: (context, url) => Shimmer.fromColors(
-                                baseColor: Colors.grey[300]!,
-                                highlightColor: Colors.grey[100]!,
-                                child: Container(color: Colors.white),
+                                baseColor: AppColors.textTertiary,
+                                highlightColor: AppColors.textTertiary,
+                                child: Container(color: AppColors.surface),
                               ),
                               errorWidget: (context, url, error) => Container(
-                                color: Colors.grey[200],
+                                color: AppColors.textTertiary,
                                 child: const Icon(LucideIcons.imageOff, color: AppColors.textTertiary),
                               ),
                             ),
@@ -82,13 +82,13 @@ class VehicleCard extends StatelessWidget {
                             width: double.infinity,
                             fit: BoxFit.cover,
                             placeholder: (context, url) => Shimmer.fromColors(
-                              baseColor: Colors.grey[300]!,
-                              highlightColor: Colors.grey[100]!,
-                              child: Container(color: Colors.white, height: 120),
+                              baseColor: AppColors.textTertiary,
+                              highlightColor: AppColors.textTertiary,
+                              child: Container(color: AppColors.surface, height: 120),
                             ),
                             errorWidget: (context, url, error) => Container(
                               height: 120,
-                              color: Colors.grey[200],
+                              color: AppColors.textTertiary,
                               child: const Icon(LucideIcons.imageOff, color: AppColors.textTertiary),
                             ),
                           ),
@@ -100,7 +100,7 @@ class VehicleCard extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(AppSpacing.sm),
                     decoration: const BoxDecoration(
-                      color: Colors.white,
+                      color: AppColors.surface,
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(LucideIcons.heart, size: 18, color: AppColors.textSecondary),
@@ -119,9 +119,9 @@ class VehicleCard extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(LucideIcons.zap, size: 12, color: Colors.white),
-                          const SizedBox(width: 2),
-                          Text('EV', style: AppTypography.textTheme.labelSmall?.copyWith(color: Colors.white, fontSize: 10)),
+                          const Icon(LucideIcons.zap, size: 12, color: AppColors.surface),
+                          const SizedBox(width: AppSpacing.xs),
+                          Text('EV', style: AppTypography.textTheme.labelSmall?.copyWith(color: AppColors.surface, fontSize: 10)),
                         ],
                       ),
                     ),
@@ -147,12 +147,12 @@ class VehicleCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      const SizedBox(width: 4),
+                      const SizedBox(width: AppSpacing.xs),
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           const Icon(LucideIcons.star, size: 14, color: AppColors.warning),
-                          const SizedBox(width: 2),
+                          const SizedBox(width: AppSpacing.xs),
                           Text(
                             vehicle.rating.toString(),
                             style: AppTypography.textTheme.labelSmall?.copyWith(color: AppColors.textPrimary),
@@ -161,7 +161,7 @@ class VehicleCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 2),
+                  const SizedBox(height: AppSpacing.xs),
                   Text(
                     '${vehicle.category} • ${vehicle.seats} Seats',
                     style: AppTypography.textTheme.bodySmall,
@@ -189,7 +189,7 @@ class VehicleCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 4),
+                      const SizedBox(width: AppSpacing.xs),
                       Container(
                         padding: EdgeInsets.symmetric(
                           horizontal: isCompact ? 8 : 12,
@@ -239,9 +239,9 @@ class VehicleCard extends StatelessWidget {
                   height: double.infinity,
                   fit: BoxFit.cover,
                   placeholder: (context, url) => Shimmer.fromColors(
-                    baseColor: Colors.grey[300]!,
-                    highlightColor: Colors.grey[100]!,
-                    child: Container(color: Colors.white, width: 125),
+                    baseColor: AppColors.textTertiary,
+                    highlightColor: AppColors.textTertiary,
+                    child: Container(color: AppColors.surface, width: 125),
                   ),
                 ),
               ),
@@ -267,7 +267,7 @@ class VehicleCard extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        const SizedBox(width: 4),
+                        const SizedBox(width: AppSpacing.xs),
                         const Icon(LucideIcons.heart, size: 18, color: AppColors.textTertiary),
                       ],
                     ),
@@ -301,7 +301,7 @@ class VehicleCard extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             const Icon(LucideIcons.star, size: 14, color: AppColors.warning),
-                            const SizedBox(width: 2),
+                            const SizedBox(width: AppSpacing.xs),
                             Text(
                               vehicle.rating.toString(),
                               style: AppTypography.textTheme.labelSmall?.copyWith(color: AppColors.textPrimary),

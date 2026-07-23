@@ -93,7 +93,7 @@ class CancellationPolicyScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title, style: AppTypography.textTheme.titleLarge?.copyWith(color: color)),
-                const SizedBox(height: 8),
+                const SizedBox(height: AppSpacing.sm),
                 Text(description, style: AppTypography.textTheme.bodyLarge),
               ],
             ),

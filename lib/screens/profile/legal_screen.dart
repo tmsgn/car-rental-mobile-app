@@ -73,7 +73,7 @@ class LegalScreen extends StatelessWidget {
             children: items.map((item) {
               return ListTile(
                 leading: Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(AppSpacing.sm),
                   decoration: BoxDecoration(
                     color: AppColors.background,
                     borderRadius: BorderRadius.circular(AppSpacing.radiusSm),

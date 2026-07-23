@@ -119,7 +119,7 @@ class _BookingSummaryScreenState extends State<BookingSummaryScreen> {
                     Row(
                       children: [
                         const Icon(LucideIcons.calendar, size: 14, color: AppColors.textTertiary),
-                        const SizedBox(width: 4),
+                        const SizedBox(width: AppSpacing.xs),
                         Text('Aug 12 - Aug 15 ($days days)', style: AppTypography.textTheme.bodySmall),
                       ],
                     ),
@@ -203,7 +203,7 @@ class _BookingSummaryScreenState extends State<BookingSummaryScreen> {
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.all(AppSpacing.sm),
             decoration: BoxDecoration(
               color: AppColors.primaryLight,
               borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
@@ -216,7 +216,7 @@ class _BookingSummaryScreenState extends State<BookingSummaryScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text('Standard Protection', style: AppTypography.textTheme.titleLarge),
-                const SizedBox(height: 2),
+                const SizedBox(height: AppSpacing.xs),
                 Text('Includes physical damage coverage up to \$50k.', style: AppTypography.textTheme.bodySmall),
               ],
             ),
@@ -266,7 +266,7 @@ class _BookingSummaryScreenState extends State<BookingSummaryScreen> {
         color: AppColors.surface,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: AppColors.textPrimary.withOpacity(0.05),
             blurRadius: 10,
             offset: const Offset(0, -4),
           ),

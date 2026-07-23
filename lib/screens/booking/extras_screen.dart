@@ -106,12 +106,12 @@ class _ExtrasScreenState extends State<ExtrasScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(AppSpacing.sm),
             decoration: BoxDecoration(
               color: isSelected ? AppColors.primary : AppColors.background,
               borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
             ),
-            child: Icon(icon, color: isSelected ? Colors.white : AppColors.primary),
+            child: Icon(icon, color: isSelected ? AppColors.surface : AppColors.primary),
           ),
           const SizedBox(width: AppSpacing.md),
           Expanded(
@@ -119,9 +119,9 @@ class _ExtrasScreenState extends State<ExtrasScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(title, style: AppTypography.textTheme.titleMedium),
-                const SizedBox(height: 4),
+                const SizedBox(height: AppSpacing.xs),
                 Text(description, style: AppTypography.textTheme.bodyMedium),
-                const SizedBox(height: 8),
+                const SizedBox(height: AppSpacing.sm),
                 Text('+\$${price.toStringAsFixed(2)} / trip', style: AppTypography.textTheme.titleSmall?.copyWith(color: AppColors.textSecondary)),
               ],
             ),
@@ -153,7 +153,7 @@ class _ExtrasScreenState extends State<ExtrasScreen> {
         color: AppColors.surface,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: AppColors.textPrimary.withOpacity(0.05),
             blurRadius: 10,
             offset: const Offset(0, -4),
           ),

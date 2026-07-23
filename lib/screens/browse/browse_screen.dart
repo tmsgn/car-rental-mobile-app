@@ -85,9 +85,9 @@ class _BrowseScreenState extends State<BrowseScreen> {
                     selected: isSelected,
                     onSelected: (val) => _applyFilter(filter),
                     selectedColor: AppColors.primary,
-                    checkmarkColor: Colors.white,
+                    checkmarkColor: AppColors.surface,
                     labelStyle: TextStyle(
-                      color: isSelected ? Colors.white : AppColors.textPrimary,
+                      color: isSelected ? AppColors.surface : AppColors.textPrimary,
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(AppSpacing.radiusPill),

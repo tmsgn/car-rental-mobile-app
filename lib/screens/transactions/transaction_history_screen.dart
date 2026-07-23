@@ -78,7 +78,7 @@ class TransactionHistoryScreen extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(10),
+              padding: const EdgeInsets.all(AppSpacing.sm),
               decoration: BoxDecoration(
                 color: iconColor.withOpacity(0.1),
                 borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
@@ -91,7 +91,7 @@ class TransactionHistoryScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(txn.vehicleName, style: AppTypography.textTheme.titleMedium, maxLines: 1, overflow: TextOverflow.ellipsis),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: AppSpacing.xs),
                   Text('${txn.typeLabel} • ${dateFormat.format(txn.date)}', style: AppTypography.textTheme.bodySmall),
                 ],
               ),
@@ -105,11 +105,11 @@ class TransactionHistoryScreen extends StatelessWidget {
                     color: txn.type == TransactionType.refund ? AppColors.success : AppColors.textPrimary,
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: AppSpacing.xs),
                 Text(
                   txn.statusLabel,
                   style: AppTypography.textTheme.labelSmall?.copyWith(
-                    color: txn.status == TransactionStatus.completed ? AppColors.success : AppColors.textSecondary,
+                    color: txn.status == TransactionStatus.successful ? AppColors.success : AppColors.textSecondary,
                   ),
                 ),
               ],
