@@ -78,16 +78,16 @@ class VehicleCard extends StatelessWidget {
                           )
                         : CachedNetworkImage(
                             imageUrl: vehicle.imageUrls.first,
-                            height: 150,
+                            height: 120,
                             width: double.infinity,
                             fit: BoxFit.cover,
                             placeholder: (context, url) => Shimmer.fromColors(
                               baseColor: Colors.grey[300]!,
                               highlightColor: Colors.grey[100]!,
-                              child: Container(color: Colors.white, height: 150),
+                              child: Container(color: Colors.white, height: 120),
                             ),
                             errorWidget: (context, url, error) => Container(
-                              height: 150,
+                              height: 120,
                               color: Colors.grey[200],
                               child: const Icon(LucideIcons.imageOff, color: AppColors.textTertiary),
                             ),

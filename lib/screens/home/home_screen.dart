@@ -161,7 +161,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildHorizontalCarList(List<Vehicle> cars) {
     return SizedBox(
-      height: 330,
+      height: 260,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: AppSpacing.pagePadding),

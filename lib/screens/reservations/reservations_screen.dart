@@ -5,6 +5,7 @@ import '../../core/spacing/app_spacing.dart';
 import '../../core/typography/app_typography.dart';
 import '../../mock_data/mock_data.dart';
 import '../../models/booking_model.dart';
+import '../../widgets/states/empty_state_widget.dart';
 import 'package:intl/intl.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/routes/app_routes.dart';
@@ -32,27 +33,22 @@ class ReservationsScreen extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-            _buildBookingsList(mockUpcomingBookings),
-            _buildBookingsList(mockPastBookings),
+            _buildBookingsList(context, mockUpcomingBookings),
+            _buildBookingsList(context, mockPastBookings),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildBookingsList(List<Booking> bookings) {
+  Widget _buildBookingsList(BuildContext context, List<Booking> bookings) {
     if (bookings.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(LucideIcons.calendar, size: 64, color: AppColors.border),
-            const SizedBox(height: AppSpacing.md),
-            Text('No bookings found', style: AppTypography.textTheme.headlineMedium),
-            const SizedBox(height: AppSpacing.sm),
-            Text('Your upcoming trips will appear here.', style: AppTypography.textTheme.bodyLarge),
-          ],
-        ),
+      return EmptyStateWidget(
+        icon: LucideIcons.calendar,
+        title: 'No bookings found',
+        message: 'Your trips will appear here.',
+        actionText: 'Find a Car',
+        onAction: () => context.go(AppRoutes.home),
       );
     }
 

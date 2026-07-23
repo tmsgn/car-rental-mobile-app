@@ -130,7 +130,7 @@ class _BrowseScreenState extends State<BrowseScreen> {
       padding: const EdgeInsets.all(AppSpacing.pagePadding),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.68,
+        childAspectRatio: 0.78,
         crossAxisSpacing: AppSpacing.md,
         mainAxisSpacing: AppSpacing.md,
       ),

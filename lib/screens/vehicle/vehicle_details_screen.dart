@@ -21,6 +21,7 @@ class VehicleDetailsScreen extends StatefulWidget {
 
 class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
   final PageController _pageController = PageController();
+  bool _isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -69,8 +70,17 @@ class _VehicleDetailsScreenState extends State<VehicleDetailsScreen> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: AppIconButton(
-            icon: LucideIcons.heart,
-            onPressed: () {},
+            icon: _isFavorite ? LucideIcons.heart : LucideIcons.heart,
+            iconColor: _isFavorite ? AppColors.error : AppColors.textPrimary,
+            onPressed: () {
+              setState(() => _isFavorite = !_isFavorite);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(_isFavorite ? 'Added to favorites' : 'Removed from favorites'),
+                  duration: const Duration(seconds: 2),
+                ),
+              );
+            },
           ),
         ),
       ],

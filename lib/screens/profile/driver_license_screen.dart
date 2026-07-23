@@ -4,6 +4,7 @@ import '../../core/colors/app_colors.dart';
 import '../../core/spacing/app_spacing.dart';
 import '../../core/typography/app_typography.dart';
 import '../../widgets/buttons/app_buttons.dart';
+import '../../widgets/states/status_badge.dart';
 
 class DriverLicenseScreen extends StatefulWidget {
   const DriverLicenseScreen({super.key});
@@ -13,7 +14,7 @@ class DriverLicenseScreen extends StatefulWidget {
 }
 
 class _DriverLicenseScreenState extends State<DriverLicenseScreen> {
-  final bool _isVerified = true;
+  final BadgeStatus _status = BadgeStatus.pending; // Using pending to show the state
 
   @override
   Widget build(BuildContext context) {
@@ -57,33 +58,40 @@ class _DriverLicenseScreenState extends State<DriverLicenseScreen> {
   }
 
   Widget _buildStatusCard() {
+    final isVerified = _status == BadgeStatus.approved;
+    final isRejected = _status == BadgeStatus.rejected;
+    
+    Color color = isVerified ? AppColors.success : (isRejected ? AppColors.error : AppColors.warning);
+    IconData icon = isVerified ? LucideIcons.checkCircle : (isRejected ? LucideIcons.xCircle : LucideIcons.clock);
+    String title = isVerified ? 'License Verified' : (isRejected ? 'Verification Rejected' : 'Verification Pending');
+    String msg = isVerified 
+        ? 'You are approved to drive all vehicles.'
+        : (isRejected ? 'Please upload a clear, valid license.' : 'We are reviewing your document.');
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
-        color: _isVerified ? AppColors.success.withOpacity(0.1) : AppColors.warning.withOpacity(0.1),
+        color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
-        border: Border.all(color: _isVerified ? AppColors.success.withOpacity(0.3) : AppColors.warning.withOpacity(0.3)),
+        border: Border.all(color: color.withOpacity(0.3)),
       ),
       child: Column(
         children: [
-          Icon(
-            _isVerified ? LucideIcons.checkCircle : LucideIcons.clock,
-            size: 48,
-            color: _isVerified ? AppColors.success : AppColors.warning,
+          StatusBadge(
+            label: title,
+            status: _status,
           ),
+          const SizedBox(height: AppSpacing.lg),
+          Icon(icon, size: 48, color: color),
           const SizedBox(height: AppSpacing.md),
           Text(
-            _isVerified ? 'License Verified' : 'Verification Pending',
-            style: AppTypography.textTheme.titleLarge?.copyWith(
-              color: _isVerified ? AppColors.success : AppColors.warning,
-            ),
+            title,
+            style: AppTypography.textTheme.titleLarge?.copyWith(color: color),
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
-            _isVerified 
-                ? 'You are approved to drive all vehicles.'
-                : 'We are reviewing your document. This usually takes 5 minutes.',
+            msg,
             textAlign: TextAlign.center,
             style: AppTypography.textTheme.bodyMedium,
           ),

@@ -30,6 +30,8 @@ import '../../screens/legal/driver_requirements_screen.dart';
 import '../../screens/reservations/reservation_details_screen.dart';
 import '../../screens/reservations/cancel_reservation_screen.dart';
 import '../../screens/reservations/write_review_screen.dart';
+import '../../screens/reservations/inspection/vehicle_inspection_screen.dart';
+import '../../screens/reservations/inspection/inspection_summary_screen.dart';
 import '../../screens/booking/extras_screen.dart';
 import '../../screens/branches/branch_list_screen.dart';
 import '../../screens/branches/branch_detail_screen.dart';
@@ -62,7 +64,7 @@ class AppRoutes {
   static const String editProfile = '/edit-profile';
   static const String paymentMethods = '/payment-methods';
   static const String addPaymentMethod = '/add-payment-method';
-  static const String driverLicense = '/driver-license';
+  static const String driverLicense = '/profile/license';
   static const String changePassword = '/change-password';
   static const String savedAddresses = '/saved-addresses';
   static const String rentalAgreement = '/rental-agreement';
@@ -77,6 +79,8 @@ class AppRoutes {
   static const String branchDetail = '/branch-detail';
   static const String transactionHistory = '/transaction-history';
   static const String invoiceDetail = '/invoice-detail';
+  static const String vehicleInspection = '/inspection';
+  static const String inspectionSummary = '/inspection-summary';
 
   static final GoRouter router = GoRouter(
     initialLocation: splash,
@@ -183,6 +187,13 @@ class AppRoutes {
         },
       ),
       GoRoute(
+        path: bookingSuccess,
+        builder: (context, state) {
+          final vehicle = state.extra as vehicle_model.Vehicle;
+          return BookingSuccessScreen(vehicle: vehicle);
+        },
+      ),
+      GoRoute(
         path: writeReview,
         builder: (context, state) {
           final booking = state.extra as booking_model.Booking;
@@ -257,6 +268,20 @@ class AppRoutes {
       GoRoute(
         path: driverRequirements,
         builder: (context, state) => const DriverRequirementsScreen(),
+      ),
+      GoRoute(
+        path: vehicleInspection,
+        builder: (context, state) {
+          final isReturn = state.extra as bool? ?? false;
+          return VehicleInspectionScreen(isReturn: isReturn);
+        },
+      ),
+      GoRoute(
+        path: inspectionSummary,
+        builder: (context, state) {
+          final isReturn = state.extra as bool? ?? false;
+          return InspectionSummaryScreen(isReturn: isReturn);
+        },
       ),
     ],
   );

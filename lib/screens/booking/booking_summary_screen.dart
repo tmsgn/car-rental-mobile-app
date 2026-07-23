@@ -184,7 +184,7 @@ class _BookingSummaryScreenState extends State<BookingSummaryScreen> {
             child: Text(method.displayName, style: AppTypography.textTheme.titleLarge),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () => context.push(AppRoutes.paymentMethods),
             child: const Text('Change'),
           ),
         ],

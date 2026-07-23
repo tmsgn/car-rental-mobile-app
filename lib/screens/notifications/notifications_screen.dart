@@ -45,7 +45,11 @@ class NotificationsScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(LucideIcons.checkCheck),
-            onPressed: () {},
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('All notifications marked as read')),
+              );
+            },
             tooltip: 'Mark all as read',
           ),
         ],

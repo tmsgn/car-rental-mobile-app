@@ -6,6 +6,7 @@ import '../../core/typography/app_typography.dart';
 import '../../core/routes/app_routes.dart';
 import '../../models/booking_model.dart';
 import '../../widgets/buttons/app_buttons.dart';
+import '../../widgets/states/status_badge.dart';
 import 'package:go_router/go_router.dart';
 
 class ReservationDetailsScreen extends StatelessWidget {
@@ -39,6 +40,22 @@ class ReservationDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildStatusHeader() {
+    BadgeStatus badgeStatus;
+    switch (booking.status) {
+      case BookingStatus.upcoming:
+        badgeStatus = BadgeStatus.pending;
+        break;
+      case BookingStatus.active:
+        badgeStatus = BadgeStatus.active;
+        break;
+      case BookingStatus.completed:
+        badgeStatus = BadgeStatus.completed;
+        break;
+      case BookingStatus.cancelled:
+        badgeStatus = BadgeStatus.cancelled;
+        break;
+    }
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(AppSpacing.lg),
@@ -48,6 +65,8 @@ class ReservationDetailsScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
+          StatusBadge(label: booking.statusLabel, status: badgeStatus),
+          const SizedBox(height: AppSpacing.md),
           Text('Booking Reference', style: AppTypography.textTheme.bodyMedium?.copyWith(color: AppColors.primary)),
           const SizedBox(height: 4),
           Text(booking.bookingReference, style: AppTypography.textTheme.headlineMedium?.copyWith(color: AppColors.primary)),
@@ -148,14 +167,26 @@ class ReservationDetailsScreen extends StatelessWidget {
   Widget _buildActionButtons(BuildContext context) {
     return Column(
       children: [
-        if (booking.status == BookingStatus.upcoming)
+        if (booking.status == BookingStatus.upcoming) ...[
           PrimaryButton(
+            text: 'Start Pickup Inspection',
+            onPressed: () => context.push(AppRoutes.vehicleInspection, extra: false),
+            icon: LucideIcons.clipboardCheck,
+          ),
+          const SizedBox(height: AppSpacing.md),
+          SecondaryButton(
             text: 'Cancel Reservation',
             onPressed: () => context.push(AppRoutes.cancelReservation, extra: booking),
-            backgroundColor: AppColors.error,
           ),
-        if (booking.status == BookingStatus.active)
+        ],
+        if (booking.status == BookingStatus.active) ...[
           PrimaryButton(
+            text: 'Start Return Inspection',
+            onPressed: () => context.push(AppRoutes.vehicleInspection, extra: true),
+            icon: LucideIcons.clipboardCheck,
+          ),
+          const SizedBox(height: AppSpacing.md),
+          SecondaryButton(
             text: 'Extend Trip',
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
@@ -164,6 +195,7 @@ class ReservationDetailsScreen extends StatelessWidget {
             },
             icon: LucideIcons.calendarClock,
           ),
+        ],
         if (booking.status == BookingStatus.completed)
           PrimaryButton(
             text: 'Write a Review',
@@ -179,7 +211,7 @@ class ReservationDetailsScreen extends StatelessWidget {
         const SizedBox(height: AppSpacing.md),
         SecondaryButton(
           text: 'Report an Issue',
-          onPressed: () {},
+          onPressed: () => context.push(AppRoutes.chat),
           icon: LucideIcons.alertCircle,
         ),
       ],

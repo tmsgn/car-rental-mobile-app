@@ -28,4 +28,17 @@ class Booking {
   int get durationInDays {
     return returnDate.difference(pickupDate).inDays;
   }
+
+  String get statusLabel {
+    switch (status) {
+      case BookingStatus.upcoming:
+        return 'Upcoming';
+      case BookingStatus.active:
+        return 'Active';
+      case BookingStatus.completed:
+        return 'Completed';
+      case BookingStatus.cancelled:
+        return 'Cancelled';
+    }
+  }
 }

@@ -18,6 +18,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
+  bool _obscurePassword = true;
 
   void _handleLogin() {
     if (_formKey.currentState?.validate() ?? false) {
@@ -77,11 +78,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 AppTextField(
                   label: 'Password',
                   hint: 'Enter your password',
-                  isPassword: true,
+                  isPassword: _obscurePassword,
                   prefixIcon: LucideIcons.lock,
                   suffixIcon: IconButton(
-                    icon: const Icon(LucideIcons.eyeOff, color: AppColors.textTertiary),
-                    onPressed: () {},
+                    icon: Icon(_obscurePassword ? LucideIcons.eye : LucideIcons.eyeOff, color: AppColors.textTertiary),
+                    onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
                   ),
                   validator: (val) {
                     if (val == null || val.isEmpty) return 'Password is required';
@@ -129,13 +130,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 SecondaryButton(
                   text: 'Continue with Google',
                   icon: LucideIcons.chrome,
-                  onPressed: () {},
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Logging in with Google...')));
+                  },
                 ),
                 const SizedBox(height: AppSpacing.md),
                 SecondaryButton(
                   text: 'Continue with Apple',
                   icon: LucideIcons.apple,
-                  onPressed: () {},
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Logging in with Apple...')));
+                  },
                 ),
                 
                 const SizedBox(height: AppSpacing.xxl),

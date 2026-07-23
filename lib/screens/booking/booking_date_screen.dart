@@ -19,10 +19,10 @@ class BookingDateScreen extends StatefulWidget {
 }
 
 class _BookingDateScreenState extends State<BookingDateScreen> {
-  DateTime? _startDate;
-  DateTime? _endDate;
-  TimeOfDay? _startTime;
-  TimeOfDay? _endTime;
+  DateTime? _startDate = DateTime.now().add(const Duration(days: 1));
+  DateTime? _endDate = DateTime.now().add(const Duration(days: 3));
+  TimeOfDay? _startTime = const TimeOfDay(hour: 10, minute: 0);
+  TimeOfDay? _endTime = const TimeOfDay(hour: 10, minute: 0);
 
   final DateFormat _dateFormatter = DateFormat('EEE, MMM d, yyyy');
 

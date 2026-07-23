@@ -164,7 +164,11 @@ class RewardsScreen extends StatelessWidget {
           const SizedBox(height: AppSpacing.md),
           PrimaryButton(
             text: 'Share Invite Link',
-            onPressed: () {},
+            onPressed: () {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Opening share dialog...')),
+              );
+            },
             icon: LucideIcons.share2,
           ),
         ],

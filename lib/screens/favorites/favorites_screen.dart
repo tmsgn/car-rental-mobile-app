@@ -4,6 +4,8 @@ import '../../core/colors/app_colors.dart';
 import '../../core/spacing/app_spacing.dart';
 import '../../core/routes/app_routes.dart';
 import '../../widgets/cards/vehicle_card.dart';
+import '../../widgets/states/empty_state_widget.dart';
+import 'package:lucide_icons/lucide_icons.dart';
 import '../../mock_data/mock_data.dart';
 
 class FavoritesScreen extends StatelessWidget {
@@ -20,8 +22,12 @@ class FavoritesScreen extends StatelessWidget {
         title: const Text('Saved Vehicles'),
       ),
       body: favorites.isEmpty
-          ? const Center(
-              child: Text('No saved vehicles yet.'), // We could use EmptyStateWidget here
+          ? EmptyStateWidget(
+              icon: LucideIcons.heartOff,
+              title: 'No Saved Vehicles',
+              message: 'Vehicles you favorite will appear here.',
+              actionText: 'Browse Vehicles',
+              onAction: () => context.go(AppRoutes.home),
             )
           : ListView.builder(
               padding: const EdgeInsets.all(AppSpacing.pagePadding),

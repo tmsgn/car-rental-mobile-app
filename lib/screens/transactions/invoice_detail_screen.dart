@@ -6,6 +6,8 @@ import '../../core/spacing/app_spacing.dart';
 import '../../core/typography/app_typography.dart';
 import '../../models/transaction_model.dart';
 import '../../widgets/buttons/app_buttons.dart';
+import 'package:go_router/go_router.dart';
+import '../../core/routes/app_routes.dart';
 
 class InvoiceDetailScreen extends StatelessWidget {
   final Transaction transaction;
@@ -77,7 +79,7 @@ class InvoiceDetailScreen extends StatelessWidget {
             SecondaryButton(
               text: 'Report an Issue',
               icon: LucideIcons.alertCircle,
-              onPressed: () {},
+              onPressed: () => context.push(AppRoutes.chat),
             ),
           ],
         ),
